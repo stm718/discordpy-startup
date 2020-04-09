@@ -22,9 +22,14 @@
 
 # インストールした discord.py を読み込む
 import discord
+from discord.ext import commands
+import os
+import traceback
 
 # 自分のBotのアクセストークンに置き換えてください
-TOKEN = 'Njk3NzQ5ODA0NjMzMjkyODYw.Xo8bPg.QthL2_myrmpA1XN1f6KhAtGMsd8'
+# TOKEN = 'Njk3NzQ5ODA0NjMzMjkyODYw.Xo8gEg.5HptXfiqkhiDA9Mqc8Uk58d8Zbs'
+bot = commands.Bot(command_prefix='/')
+token = os.environ['DISCORD_BOT_TOKEN']
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
