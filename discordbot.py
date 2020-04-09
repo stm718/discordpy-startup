@@ -27,9 +27,8 @@ import os
 import traceback
 
 # 自分のBotのアクセストークンに置き換えてください
-# TOKEN = 'Njk3NzQ5ODA0NjMzMjkyODYw.Xo8gEg.5HptXfiqkhiDA9Mqc8Uk58d8Zbs'
 bot = commands.Bot(command_prefix='/')
-token = os.environ['DISCORD_BOT_TOKEN']
+TOKEN = os.environ['DISCORD_BOT_TOKEN']
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
