@@ -41,7 +41,7 @@ async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
     # ～をプレイ中
-    game = discord.Game("$recommend | 屋上の百合霊さん")
+    game = discord.Game("$recommend | $help")
     await client.change_presence(activity=game)
 
 # メッセージ受信時に動作する処理
@@ -63,7 +63,7 @@ async def on_message(message):
     
     elif message.content == '$help':
         dm = await message.author.create_dm()
-        help_message =  "メンションすると何か返事します。\n$recommend と投稿するとランダムで百合作品をお勧めします。"
+        help_message =  "メンションすると何か返事します。\n$recommend と投稿するとランダムで百合作品をお勧めします。\n$help と投稿するとDMでこのbotの使い方を説明します。（今見てるこれ。）\n百合はいいぞ"
         await dm.send(help_message)
 
 # Botの起動とDiscordサーバーへの接続
