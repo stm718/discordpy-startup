@@ -64,7 +64,7 @@ async def on_message(message):
     elif message.content == '$help':
         dm = await message.author.create_dm()
         help_message =  "メンションすると何か返事します。\n$recommend と投稿するとランダムで百合作品をお勧めします。"
-        await dm.send(help_massage)
+        await dm.send(help_message)
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
