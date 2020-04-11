@@ -47,9 +47,9 @@ async def on_ready():
 # メッセージ受信時に動作する処理
 @client.event
 async def on_message(message):
-    # if client.user in message.mentions: # 話しかけられたかの判定
-    #     reply = f'{message.author.mention} 百合はいいぞ' # 返信メッセージの作成
-    #     await message.channel.send(reply) # 返信メッセージを送信
+    if client.user in message.mentions: # 話しかけられたかの判定
+        reply = f'{message.author.mention} 百合はいいぞ' # 返信メッセージの作成
+        await message.channel.send(reply) # 返信メッセージを送信
     if message.content == '$recommend':
         options = ["『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
                 "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』"]
