@@ -48,10 +48,13 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if client.user in message.mentions: # 話しかけられたかの判定
-        options = ["『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
-                    "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』"]
-        reply = options[math.floor(random.random()*len(options))] # 返信メッセージの作成 f'{message.author.mention} 百合はいいぞ'
+        reply = f'{message.author.mention} 百合はいいぞ' # 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
+        if message.content == '$recommend':
+            options = ["『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
+                    "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』"]
+            response = options[math.floor(random.random()*len(options))]
+            await message.channel.send(response)
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
