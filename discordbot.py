@@ -39,7 +39,7 @@ async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
     # ～をプレイ中
-    game = discord.Game("with the API")
+    game = discord.Game("屋上の百合霊さん")
     await client.change_presence(status=discord.Status.idle, activity=game)
 
 # メッセージ受信時に動作する処理
