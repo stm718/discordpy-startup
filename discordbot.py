@@ -50,11 +50,21 @@ async def on_message(message):
     if client.user in message.mentions: # 話しかけられたかの判定
         reply = f'{message.author.mention} 百合はいいぞ' # 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
+    
     if message.content == '$recommend':
-        options = ["『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
-                "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』"]
+        options = [
+            "『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
+            "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』", 
+            "『リップヴァンウィンクルの花嫁』", "『花とアリス』", "『噂の二人』",
+            "『お嬢さん』",
+            ]
         response = options[math.floor(random.random()*len(options))]
         await message.channel.send(response)
+    
+    elif message.content == '$help':
+        dm = await message.author.create_dm()
+        help_message =  "メンションすると何か返事します。\n$recommend と投稿するとランダムで百合作品をお勧めします。"
+        await dm.send(help_massage)
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
