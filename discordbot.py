@@ -67,7 +67,7 @@ async def on_message(message):
         # ヘッダーがあるファイルの読み込み
         df = pd.read_csv('yurilist.csv', usecols=['タイトル'])
         osusume = random.randint(0, len(df)) # 疑似乱数生成
-        await message.channel.send(df(osusume)) # 返信メッセージを送信
+        await message.channel.send(df[osusume]) # 返信メッセージを送信
     
     elif message.content == '$help':
         # DMを送信
