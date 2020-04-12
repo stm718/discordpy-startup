@@ -25,6 +25,7 @@ import discord
 from discord.ext import commands
 import os
 import traceback
+import re
 import random
 # import math
 import pandas as pd
@@ -53,16 +54,7 @@ async def on_message(message):
         await message.channel.send(reply) # 返信メッセージを送信
         print("メッセージ送信")
     
-    if message.content == '$recommend':
-        # お勧めする作品のタイトルリスト
-        # options = [
-        #     "『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
-        #     "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』", 
-        #     "『リップヴァンウィンクルの花嫁』", "『花とアリス』", "『噂の二人』",
-        #     "『お嬢さん』",
-        #     ]
-        # response = options[math.floor(random.random()*len(options))] # 返信メッセージの作成
-        # await message.channel.send(response) # 返信メッセージを送信
+    if message.content == '$recommend': # $recommendが投稿されたとき、百合作品をお勧めする
         # csv読み込み
         # ヘッダーがあるファイルの読み込み
         df = pd.read_csv('yurilist.csv', usecols=['タイトル'])
@@ -74,7 +66,7 @@ async def on_message(message):
         await message.channel.send(reply)
         print("お勧め作品タイトル送信")
     
-    elif message.content == '$help':
+    elif message.content == '$help': # $helpが投稿されたとき、このbotの使い方をDMで送る
         # DMを送信
         dm = await message.author.create_dm()
         help_message =  "メンションすると何か返事します。\n$recommend と投稿するとランダムで百合作品をお勧めします。\n$help と投稿するとDMでこのbotの使い方を説明します。（今見てるこれ。）\n百合はいいぞ"
@@ -83,6 +75,16 @@ async def on_message(message):
         await message.channel.send(f"{message.author.mention}さん、DMを送りました")
         print("ヘルプメッセージを送信")
 
+    elif message.content.startwith('$love') == True:
+        # $love <name1> <name2>が投稿されたとき、<name1>から<name2>にラブビームを送る
+        m = re.match(r'($love) ([a-z]+) ([a-z]+)', message.content)
+        print("グループ")
+        print(m.groups())
+        name1 = m.group(2)
+        name2 = m.group(3)
+        beam = name1 + ":heart: :heart: :heart: :heart: :heart:" + name2
+        await message.channel.send(beam)
+        print("ラブビーム")
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
