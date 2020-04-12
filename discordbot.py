@@ -85,11 +85,11 @@ async def on_message(message):
             name1 = m.group(2)
             name2 = m.group(3)
             beam = name1 + (':white_heart:' * 5) + name2
-            await message.channel.send(beam)
+            sent_message = await message.channel.send(beam)
             for i in range(1, 6):
                 sleep(1)
                 beam = name1 + (':heart:' * i) + (':white_heart:' * (5-i)) + name2
-                await message.channel.edit(beam)
+                await sent_message.channel.edit(content=beam)
             print("ラブビーム")
 
 # Botの起動とDiscordサーバーへの接続
