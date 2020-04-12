@@ -74,7 +74,7 @@ async def on_message(message):
         # 疑似乱数生成
         osusume = random.randint(0, len(df))
         # 返信メッセージを生成
-        reply = df[osusume]
+        reply = df[osusume:osusume+1]
         # 返信メッセージを送信
         await message.channel.send(reply)
     
