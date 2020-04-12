@@ -27,6 +27,7 @@ import os
 import traceback
 import re
 import random
+from time import sleep
 # import math
 import pandas as pd
 
@@ -77,17 +78,17 @@ async def on_message(message):
 
     elif message.content.startswith('$love') == True:
         # $love <name1> <name2>が投稿されたとき、<name1>から<name2>にラブビームを送る
-        print("メッセージ：%s、型：%s" % (message.content, type(message.content)))
-        m = re.match(r'(\$love) ([a-z]+) ([a-z]+)', message.content)
-        print(m)
-        print(type(m))
-        print("グループ==>")
-        print(m.groups())
-        name1 = m.group(2)
-        name2 = m.group(3)
-        beam = name1 + ":heart: :heart: :heart: :heart: :heart:" + name2
-        await message.channel.send(beam)
-        print("ラブビーム")
+        m = re.match(r'(\$love)[ ]([a-z|A-Z|0-9]+)[ ]([a-z|A-Z|0-9]+)', message.content)
+        if m == None:
+            print("$love <name1> <name2>の形で入力してください！")
+        else:
+            name1 = m.group(2)
+            name2 = m.group(3)
+            for i in range(5):
+                sleep(1)
+                beam = name1 + (':heart:' * i) + (':white_heart:' * (5-i)) + name2
+                await message.channel.send(beam)
+            print("ラブビーム")
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
