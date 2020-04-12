@@ -51,6 +51,7 @@ async def on_message(message):
     if client.user in message.mentions: # 話しかけられたかの判定
         reply = f'{message.author.mention} 百合はいいぞ' # 返信メッセージの作成
         await message.channel.send(reply) # 返信メッセージを送信
+        print("メッセージ送信")
     
     if message.content == '$recommend':
         # お勧めする作品のタイトルリスト
@@ -65,18 +66,13 @@ async def on_message(message):
         # csv読み込み
         # ヘッダーがあるファイルの読み込み
         df = pd.read_csv('yurilist.csv', usecols=['タイトル'])
-        # 読み込んだデータの確認
-        df.head()
-        print('dataframeの行数・列数の確認==>\n', df.shape)
-        print('indexの確認==>\n', df.index)
-        print('columnの確認==>\n', df.columns)
-        print('dataframeの各列のデータ型を確認==>\n', df.dtypes)
         # 疑似乱数生成
         osusume = random.randint(0, len(df))
         # 返信メッセージを生成
-        reply = df[osusume:osusume+1]
+        reply = df.iat[osusume, 0]
         # 返信メッセージを送信
         await message.channel.send(reply)
+        print("お勧め作品タイトル送信")
     
     elif message.content == '$help':
         # DMを送信
@@ -85,7 +81,7 @@ async def on_message(message):
         await dm.send(help_message)
         # DMを送信したことの通知
         await message.channel.send(f"{message.author.mention}さん、DMを送りました")
-
+        print("ヘルプメッセージを送信")
 
 
 # Botの起動とDiscordサーバーへの接続
