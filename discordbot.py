@@ -62,12 +62,21 @@ async def on_message(message):
         #     ]
         # response = options[math.floor(random.random()*len(options))] # 返信メッセージの作成
         # await message.channel.send(response) # 返信メッセージを送信
-
         # csv読み込み
         # ヘッダーがあるファイルの読み込み
         df = pd.read_csv('yurilist.csv', usecols=['タイトル'])
-        osusume = random.randint(0, len(df)) # 疑似乱数生成
-        await message.channel.send(df[osusume]) # 返信メッセージを送信
+        # 読み込んだデータの確認
+        df.head()
+        print('dataframeの行数・列数の確認==>\n', df.shape)
+        print('indexの確認==>\n', df.index)
+        print('columnの確認==>\n', df.columns)
+        print('dataframeの各列のデータ型を確認==>\n', df.dtypes)
+        # 疑似乱数生成
+        osusume = random.randint(0, len(df))
+        # 返信メッセージを生成
+        reply = df[osusume]
+        # 返信メッセージを送信
+        await message.channel.send(reply)
     
     elif message.content == '$help':
         # DMを送信
