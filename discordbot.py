@@ -26,7 +26,8 @@ from discord.ext import commands
 import os
 import traceback
 import random
-import math
+# import math
+import pandas as pd
 
 # 自分のBotのアクセストークンに置き換えてください
 bot = commands.Bot(command_prefix='/')
@@ -53,14 +54,20 @@ async def on_message(message):
     
     if message.content == '$recommend':
         # お勧めする作品のタイトルリスト
-        options = [
-            "『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
-            "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』", 
-            "『リップヴァンウィンクルの花嫁』", "『花とアリス』", "『噂の二人』",
-            "『お嬢さん』",
-            ]
-        response = options[math.floor(random.random()*len(options))] # 返信メッセージの作成
-        await message.channel.send(response) # 返信メッセージを送信
+        # options = [
+        #     "『推しが武道館行ってくれたら死ぬ』", "『やがて君になる』", "『彼女の沈清』", 
+        #     "『屋上の百合霊さん』", "『白衣性恋愛症候群』", "『夢現Re:M@ster』", 
+        #     "『リップヴァンウィンクルの花嫁』", "『花とアリス』", "『噂の二人』",
+        #     "『お嬢さん』",
+        #     ]
+        # response = options[math.floor(random.random()*len(options))] # 返信メッセージの作成
+        # await message.channel.send(response) # 返信メッセージを送信
+
+        # csv読み込み
+        # ヘッダーがあるファイルの読み込み
+        df = pd.read_csv('yurilist.csv', usecols=['タイトル'])
+        osusume = random.randint(0, len(df)) # 疑似乱数生成
+        await message.channel.send(df(osusume)) # 返信メッセージを送信
     
     elif message.content == '$help':
         # DMを送信
