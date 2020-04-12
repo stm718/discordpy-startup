@@ -78,7 +78,7 @@ async def on_message(message):
     elif message.content.startswith('$love') == True:
         # $love <name1> <name2>が投稿されたとき、<name1>から<name2>にラブビームを送る
         print("メッセージ：%s、型：%s" % (message.content, type(message.content)))
-        m = re.match(r'($love) ([a-z]+) ([a-z]+)', message.content)
+        m = re.match(r'(\$love) ([a-z]+) ([a-z]+)', message.content)
         print(m)
         print(type(m))
         print("グループ==>")
